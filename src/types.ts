@@ -13,7 +13,7 @@ export interface ProjectItem {
   category: string;
   description: string;
   image: string;
-  video: string;
+  video?: string;
   tags: string[];
 }
 
