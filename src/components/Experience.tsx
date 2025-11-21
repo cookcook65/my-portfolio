@@ -1,6 +1,6 @@
 import React from 'react';
 import { EXPERIENCES, SKILLS } from '../constants';
-import { Briefcase, GraduationCap } from 'lucide-react';
+import { GraduationCap } from 'lucide-react';
 
 const Experience: React.FC = () => {
   return (
@@ -32,7 +32,7 @@ const Experience: React.FC = () => {
 
         {/* Timeline */}
         <div className="relative border-l border-white/10 ml-3 md:ml-0">
-          {EXPERIENCES.map((exp, index) => (
+          {EXPERIENCES.map((exp) => (
             <div key={exp.id} className="mb-16 pl-8 md:pl-12 relative">
               {/* Timeline Dot */}
               <div className="absolute -left-[5px] top-2 w-[10px] h-[10px] rounded-full bg-hmi-black border-2 border-hmi-accent"></div>

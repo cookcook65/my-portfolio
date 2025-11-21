@@ -1,4 +1,4 @@
-import { ExperienceItem, ProjectItem, SkillGroup } from './types';
+import type { ExperienceItem, ProjectItem, SkillGroup } from './types';
 
 export const NAVIGATION_LINKS = [
   { name: 'About', href: '#about' },

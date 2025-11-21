@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PROJECTS } from '../constants';
 import { ArrowUpRight, Layers, Zap, Box, X, PlayCircle } from 'lucide-react';
-import { ProjectItem } from '../types';
+import type { ProjectItem } from '../types';
 
 const Work: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
@@ -133,7 +133,7 @@ const Work: React.FC = () => {
         {/* Bottom Decoration */}
         <div className="flex justify-center mt-16">
             <div className="h-1 w-24 bg-white/10 rounded-full overflow-hidden">
-                <div className="h-full w-1/3 bg-hmi-accent animate-[slide_3s_infinite_linear]"></div>
+                <div className="h-full w-1/3 bg-hmi-accent animate-slide"></div>
             </div>
         </div>
       </div>
@@ -208,13 +208,6 @@ const Work: React.FC = () => {
             </div>
         </div>
       )}
-
-      <style>{`
-        @keyframes slide {
-            0% { margin-left: -50%; }
-            100% { margin-left: 150%; }
-        }
-      `}</style>
     </section>
   );
 };
