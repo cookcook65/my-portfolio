@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import React, { useState, useEffect, useMemo } from 'react';
 import { PROJECTS } from '../constants';
 import { ArrowUpRight, Layers, Zap, Box, X, PlayCircle, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -110,10 +111,11 @@ const Work: React.FC = () => {
                 
                 {/* Image with interactions */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 z-10 pointer-events-none"></div>
+                
                 <img 
                   src={resolveAsset(project.image)} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100"
+                  alt={project.title}
+                  className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100"
                 />
                 
                 {/* Video Indicator if available */}
@@ -205,23 +207,38 @@ const Work: React.FC = () => {
 
                 {/* Media Section */}
                 <div className="w-full md:w-3/4 bg-black flex items-center justify-center relative overflow-hidden group">
-                     {/* Current Media */}
-                     {galleryItems[currentSlide]?.type === 'video' ? (
-                        <video 
-                            key={`slide-${currentSlide}`}
-                            src={resolveAsset(galleryItems[currentSlide].url)} 
-                            controls 
-                            autoPlay 
-                            className="w-full h-full object-contain"
-                        />
-                     ) : (
-                        <img 
-                            key={`slide-${currentSlide}`}
-                            src={resolveAsset(galleryItems[currentSlide]?.url)} 
-                            alt={selectedProject.title} 
-                            className="w-full h-full object-contain"
-                        />
-                     )}
+                     {/* 
+                        Use mapping with opacity transition for smooth cross-fades 
+                        instead of unmounting/remounting which causes flashes 
+                     */}
+                     {galleryItems.map((item, index) => {
+                       const isActive = index === currentSlide;
+                       return (
+                         <div 
+                            key={index}
+                            className={`absolute inset-0 w-full h-full flex items-center justify-center transition-opacity duration-500 ease-out ${
+                                isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                            }`}
+                         >
+                            {item.type === 'video' ? (
+                                <video 
+                                    src={resolveAsset(item.url)}
+                                    className="w-full h-full object-contain"
+                                    controls={isActive}
+                                    autoPlay={isActive}
+                                    loop
+                                    playsInline
+                                />
+                             ) : (
+                                <img 
+                                    src={resolveAsset(item.url)}
+                                    alt={item.caption || selectedProject.title}
+                                    className="w-full h-full object-contain"
+                                />
+                             )}
+                         </div>
+                       );
+                     })}
 
                      {/* Navigation Arrows (only if > 1 item) */}
                      {galleryItems.length > 1 && (
@@ -242,12 +259,12 @@ const Work: React.FC = () => {
                      )}
                      
                      {/* Decorative lines */}
-                     <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                     <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none z-20"></div>
                      
                      {/* Caption & Navigation Indicators */}
-                     <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/80 to-transparent pt-12 pb-4 px-6 flex flex-col items-center pointer-events-none">
+                     <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/80 to-transparent pt-12 pb-4 px-6 flex flex-col items-center pointer-events-none z-30">
                         {galleryItems[currentSlide]?.caption && (
-                          <p className="text-white/90 font-medium text-sm mb-3 text-center px-4">
+                          <p className="text-white/90 font-medium text-sm mb-3 text-center px-4 transition-all duration-300">
                             {galleryItems[currentSlide].caption}
                           </p>
                         )}
@@ -269,7 +286,7 @@ const Work: React.FC = () => {
                 </div>
 
                 {/* Details Sidebar */}
-                <div className="w-full md:w-1/4 bg-hmi-gray/95 border-l border-white/10 p-6 md:p-8 flex flex-col overflow-y-auto relative">
+                <div className="w-full md:w-1/4 bg-hmi-gray/95 border-l border-white/10 p-6 md:p-8 flex flex-col overflow-y-auto relative z-40">
                     <div className="hidden md:flex justify-end mb-6">
                          <button onClick={() => setSelectedProject(null)} className="text-gray-400 hover:text-white transition-colors">
                             <X size={24} />
