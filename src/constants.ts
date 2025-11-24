@@ -77,11 +77,7 @@ export const PROJECTS: ProjectItem[] = [
     video: '/assets//project1/cover.mp4',
     gallery: [
       { type: 'video', url: '/assets/project1/demo.mp4', caption: 'System Overview' },
-<<<<<<< HEAD
       { type: 'video', url: '/assets/project1/cluster_demo.mp4', caption: 'Cluster Implementation Transition' },
-=======
-      { type: 'video', url: '/assets/project1/cover.mp4', caption: 'Cluster Implementation Transition' },
->>>>>>> 13baef0bd8a850f09ad009e1e1285bc34f1597f2
       { type: 'video', url: '/assets/project1/quickcontrol.mp4', caption: 'Component Library' }
     ],
     tags: ['HMI System', 'Standardization', 'Production']

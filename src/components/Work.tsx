@@ -209,11 +209,7 @@ const Work: React.FC = () => {
                      {galleryItems[currentSlide]?.type === 'video' ? (
                         <video 
                             key={`slide-${currentSlide}`}
-<<<<<<< HEAD
                             src={resolveAsset(galleryItems[currentSlide].url)} 
-=======
-                            src={galleryItems[currentSlide].url} 
->>>>>>> 13baef0bd8a850f09ad009e1e1285bc34f1597f2
                             controls 
                             autoPlay 
                             className="w-full h-full object-contain"
@@ -221,11 +217,7 @@ const Work: React.FC = () => {
                      ) : (
                         <img 
                             key={`slide-${currentSlide}`}
-<<<<<<< HEAD
                             src={resolveAsset(galleryItems[currentSlide]?.url)} 
-=======
-                            src={galleryItems[currentSlide]?.url} 
->>>>>>> 13baef0bd8a850f09ad009e1e1285bc34f1597f2
                             alt={selectedProject.title} 
                             className="w-full h-full object-contain"
                         />
