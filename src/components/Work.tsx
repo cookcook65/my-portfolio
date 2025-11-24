@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { PROJECTS } from '../constants';
-import { ArrowUpRight, Layers, Zap, Box, X, PlayCircle } from 'lucide-react';
-import type { ProjectItem } from '../types';
+import { ArrowUpRight, Layers, Zap, Box, X, PlayCircle, ChevronLeft, ChevronRight, Image as ImageIcon, Film } from 'lucide-react';
+import type { ProjectItem, GalleryItem } from '../types';
 
 const Work: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     if (selectedProject) {
       document.body.style.overflow = 'hidden';
+      setCurrentSlide(0);
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -16,6 +18,38 @@ const Work: React.FC = () => {
       document.body.style.overflow = 'unset';
     };
   }, [selectedProject]);
+
+  const hasGallery = selectedProject?.gallery && selectedProject.gallery.length > 0;
+
+  const nextSlide = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectedProject?.gallery) {
+      setCurrentSlide((prev) => (prev + 1) % selectedProject.gallery!.length);
+    }
+  };
+
+  const prevSlide = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectedProject?.gallery) {
+      setCurrentSlide((prev) => (prev - 1 + selectedProject.gallery!.length) % selectedProject.gallery!.length);
+    }
+  };
+
+  const getCurrentMedia = (): GalleryItem | { type: 'video' | 'image', url: string, caption?: string } => {
+    if (!selectedProject) return { type: 'image', url: '' };
+
+    if (hasGallery) {
+      return selectedProject.gallery![currentSlide];
+    }
+    
+    // Fallback for projects without gallery
+    if (selectedProject.video) {
+        return { type: 'video', url: selectedProject.video };
+    }
+    return { type: 'image', url: selectedProject.image };
+  };
+
+  const currentMedia = getCurrentMedia();
 
   return (
     <section id="work" className="py-24 bg-transparent relative overflow-hidden">
@@ -59,6 +93,12 @@ const Work: React.FC = () => {
                      <span className="px-2 py-1 bg-black/60 border border-white/10 text-[10px] font-mono text-white rounded backdrop-blur-sm uppercase tracking-wider">
                         {project.category}
                     </span>
+                     {project.gallery && (
+                         <span className="px-2 py-1 bg-black/60 border border-white/10 text-[10px] font-mono text-hmi-accent rounded backdrop-blur-sm uppercase tracking-wider flex items-center gap-1">
+                            <Layers size={10} />
+                            {project.gallery.length}
+                         </span>
+                     )}
                 </div>
                 
                 {/* Image with interactions */}
@@ -70,7 +110,7 @@ const Work: React.FC = () => {
                 />
                 
                 {/* Video Indicator if available */}
-                {project.video && (
+                {(project.video || (project.gallery && project.gallery.some(i => i.type === 'video'))) && (
                     <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div className="w-12 h-12 rounded-full bg-hmi-accent/20 backdrop-blur-sm flex items-center justify-center border border-hmi-accent">
                             <PlayCircle className="text-hmi-accent w-6 h-6" />
@@ -118,7 +158,7 @@ const Work: React.FC = () => {
                   <div className="pt-4 border-t border-white/5 flex items-center justify-between group-hover:border-white/20 transition-colors">
                      <span className="text-xs font-semibold text-gray-500 group-hover:text-white transition-colors flex items-center gap-2">
                        <Zap size={12} className="text-hmi-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                       VIEW MEDIA
+                       VIEW GALLERY
                      </span>
                      <div className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 group-hover:bg-hmi-accent group-hover:text-black transition-all">
                         <ArrowUpRight size={16} />
@@ -140,13 +180,13 @@ const Work: React.FC = () => {
       
       {/* Modal Lightbox */}
       {selectedProject && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-8">
             <div 
-                className="absolute inset-0 bg-black/90 backdrop-blur-xl animate-in fade-in duration-300" 
+                className="absolute inset-0 bg-black/95 backdrop-blur-xl animate-in fade-in duration-300" 
                 onClick={() => setSelectedProject(null)}
             ></div>
             
-            <div className="relative w-full max-w-6xl bg-hmi-gray border border-white/10 rounded-lg overflow-hidden shadow-2xl flex flex-col md:flex-row animate-in zoom-in-95 duration-300 h-[80vh] md:h-[70vh]">
+            <div className="relative w-full max-w-7xl bg-hmi-gray border border-white/10 rounded-lg overflow-hidden shadow-2xl flex flex-col md:flex-row animate-in zoom-in-95 duration-300 h-full md:h-[85vh]">
                 
                 {/* Close Button Mobile */}
                 <button 
@@ -156,25 +196,84 @@ const Work: React.FC = () => {
                     <X size={20} />
                 </button>
 
-                {/* Media Section */}
-                <div className="w-full md:w-3/4 bg-black flex items-center justify-center relative overflow-hidden group">
-                     {selectedProject.video ? (
-                        <video 
-                            src={selectedProject.video} 
-                            controls 
-                            autoPlay 
-                            className="w-full h-full object-contain"
-                        />
-                     ) : (
-                        <img 
-                            src={selectedProject.image} 
-                            alt={selectedProject.title} 
-                            className="w-full h-full object-contain"
-                        />
+                {/* Media Gallery Section */}
+                <div className="w-full md:w-3/4 bg-black flex items-center justify-center relative group overflow-hidden">
+                     
+                     {/* Media Content */}
+                     <div className="w-full h-full flex items-center justify-center p-4 md:p-0">
+                        {currentMedia.type === 'video' ? (
+                            <video 
+                                key={currentMedia.url} // Key forces re-render/reset when switching
+                                src={currentMedia.url} 
+                                controls 
+                                autoPlay 
+                                className="w-full h-full object-contain animate-in fade-in duration-500"
+                            />
+                        ) : (
+                            <img 
+                                key={currentMedia.url}
+                                src={currentMedia.url} 
+                                alt={selectedProject.title} 
+                                className="w-full h-full object-contain animate-in fade-in duration-500"
+                            />
+                        )}
+                     </div>
+
+                     {/* Gallery Navigation Controls */}
+                     {hasGallery && (selectedProject.gallery!.length > 1) && (
+                        <>
+                            <button 
+                                onClick={prevSlide}
+                                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-hmi-accent/20 border border-white/10 hover:border-hmi-accent text-white rounded-full transition-all backdrop-blur-sm opacity-0 group-hover:opacity-100"
+                            >
+                                <ChevronLeft size={24} />
+                            </button>
+                            <button 
+                                onClick={nextSlide}
+                                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-hmi-accent/20 border border-white/10 hover:border-hmi-accent text-white rounded-full transition-all backdrop-blur-sm opacity-0 group-hover:opacity-100"
+                            >
+                                <ChevronRight size={24} />
+                            </button>
+
+                            {/* Gallery Counter & Caption */}
+                            <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/80 to-transparent p-6 pb-8">
+                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                    <div className="flex items-center gap-3">
+                                        <span className="font-mono text-xl font-bold text-hmi-accent">
+                                            {String(currentSlide + 1).padStart(2, '0')}
+                                        </span>
+                                        <div className="h-px w-8 bg-white/30"></div>
+                                        <span className="font-mono text-sm text-gray-500">
+                                            {String(selectedProject.gallery!.length).padStart(2, '0')}
+                                        </span>
+                                    </div>
+                                    
+                                    {currentMedia.caption && (
+                                        <div className="text-white/90 text-sm font-medium border-l-2 border-hmi-accent pl-3">
+                                            {currentMedia.caption}
+                                        </div>
+                                    )}
+
+                                    {/* Type indicator */}
+                                    <div className="hidden md:flex items-center gap-2 text-xs font-mono text-gray-500 uppercase">
+                                        {currentMedia.type === 'video' ? <Film size={14}/> : <ImageIcon size={14}/>}
+                                        {currentMedia.type}
+                                    </div>
+                                </div>
+                                
+                                {/* Progress Bar */}
+                                <div className="w-full h-0.5 bg-white/10 mt-4 overflow-hidden rounded-full">
+                                    <div 
+                                        className="h-full bg-hmi-accent transition-all duration-300 ease-out"
+                                        style={{ width: `${((currentSlide + 1) / selectedProject.gallery!.length) * 100}%` }}
+                                    ></div>
+                                </div>
+                            </div>
+                        </>
                      )}
+
                      {/* Decorative lines */}
                      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                     <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
                 </div>
 
                 {/* Details Sidebar */}
@@ -185,23 +284,36 @@ const Work: React.FC = () => {
                         </button>
                     </div>
 
-                    <div className="mb-1">
-                        <span className="text-hmi-accent text-xs font-mono tracking-wider uppercase">{selectedProject.category}</span>
+                    <div className="mb-2">
+                        <span className="text-hmi-accent text-xs font-mono tracking-wider uppercase bg-hmi-accent/10 px-2 py-1 rounded border border-hmi-accent/20">
+                            {selectedProject.category}
+                        </span>
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-4">{selectedProject.title}</h3>
                     
-                    <p className="text-gray-400 text-sm leading-relaxed mb-8">
+                    <p className="text-gray-400 text-sm leading-relaxed mb-8 border-b border-white/5 pb-8">
                         {selectedProject.description}
                     </p>
 
-                    <div className="mt-auto">
-                         <div className="text-xs font-mono text-gray-500 mb-3 uppercase">Technologies</div>
-                         <div className="flex flex-wrap gap-2">
-                            {selectedProject.tags.map(tag => (
-                                <span key={tag} className="text-xs font-medium px-2 py-1 bg-white/10 text-gray-300 rounded border border-white/5">
-                                    {tag}
-                                </span>
-                            ))}
+                    <div className="space-y-6">
+                        <div>
+                             <div className="text-xs font-mono text-gray-500 mb-3 uppercase flex items-center gap-2">
+                                <Box size={12} />
+                                Technologies
+                             </div>
+                             <div className="flex flex-wrap gap-2">
+                                {selectedProject.tags.map(tag => (
+                                    <span key={tag} className="text-xs font-medium px-2 py-1 bg-white/5 text-gray-300 rounded border border-white/5 hover:border-white/20 transition-colors cursor-default">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Project Metadata Example */}
+                        <div>
+                             <div className="text-xs font-mono text-gray-500 mb-2 uppercase">Role</div>
+                             <div className="text-sm text-gray-300">Lead Motion Designer</div>
                         </div>
                     </div>
                 </div>

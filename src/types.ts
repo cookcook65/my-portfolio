@@ -1,3 +1,9 @@
+export interface GalleryItem {
+  type: 'image' | 'video';
+  url: string;
+  caption?: string;
+}
+
 export interface ExperienceItem {
   id: string;
   role: string;
@@ -14,6 +20,7 @@ export interface ProjectItem {
   description: string;
   image: string;
   video?: string;
+  gallery?: GalleryItem[];
   tags: string[];
 }
 

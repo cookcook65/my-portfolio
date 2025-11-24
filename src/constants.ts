@@ -73,7 +73,24 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Motion Design for SOP',
     category: 'Mass Production',
     description: 'Led the platform-based motion system for 5 vehicle models. Defined the unified HMI motion language and technical specifications for development handoff.',
-    image: 'https://picsum.photos/800/450?grayscale&blur=2',
+    image: '/assets/project1/sop.png',
+    gallery: [
+      {
+        type: 'video',
+        url: '/assets/project1/demo.mp4',
+        caption: 'Unified Motion Language Overview - Dark Mode'
+      },
+      {
+        type: 'video',
+        url: '/assets/project1/cluster_demo.mp4',
+        caption: 'Instrument Cluster Transitions'
+      },
+      {
+        type: 'video',
+        url: '/assets/project1/quickcontrol.mp4',
+        caption: 'IVI System Feedback Animations'
+      }
+    ],
     tags: ['HMI System', 'Standardization', 'Production']
   },
   {
@@ -82,6 +99,18 @@ export const PROJECTS: ProjectItem[] = [
     category: 'Concept & Verification',
     description: 'Built a high-fidelity verification environment using Unreal Engine. Responsible for scene construction, camera blueprint logic, and driving mode transitions.',
     image: 'https://picsum.photos/800/451?grayscale&blur=2',
+    gallery: [
+       {
+        type: 'image',
+        url: 'https://picsum.photos/800/453?grayscale',
+        caption: 'Unreal Engine Environment Setup'
+      },
+      {
+        type: 'image',
+        url: 'https://picsum.photos/800/454?grayscale',
+        caption: 'Blueprint Logic for Camera Control'
+      }
+    ],
     tags: ['Unreal Engine', 'Blueprints', 'Technical Art']
   },
   {
