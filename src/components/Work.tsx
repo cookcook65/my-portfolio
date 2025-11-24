@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { PROJECTS } from '../constants';
-import { ArrowUpRight, Layers, Zap, Box, X, PlayCircle, ChevronLeft, ChevronRight, Image as ImageIcon, Film } from 'lucide-react';
+import { ArrowUpRight, Layers, Zap, Box, X, PlayCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { ProjectItem, GalleryItem } from '../types';
 
 const Work: React.FC = () => {
@@ -10,7 +10,7 @@ const Work: React.FC = () => {
   useEffect(() => {
     if (selectedProject) {
       document.body.style.overflow = 'hidden';
-      setCurrentSlide(0);
+      setCurrentSlide(0); // Reset slide on open
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -19,37 +19,30 @@ const Work: React.FC = () => {
     };
   }, [selectedProject]);
 
-  const hasGallery = selectedProject?.gallery && selectedProject.gallery.length > 0;
-
-  const nextSlide = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (selectedProject?.gallery) {
-      setCurrentSlide((prev) => (prev + 1) % selectedProject.gallery!.length);
+  const galleryItems: GalleryItem[] = useMemo(() => {
+    if (!selectedProject) return [];
+    if (selectedProject.gallery && selectedProject.gallery.length > 0) {
+      return selectedProject.gallery;
     }
+    // Fallback to video or image
+    return [
+      { 
+        type: selectedProject.video ? 'video' : 'image', 
+        url: selectedProject.video || selectedProject.image,
+        caption: 'Project Overview'
+      }
+    ];
+  }, [selectedProject]);
+
+  const nextSlide = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCurrentSlide((prev) => (prev + 1) % galleryItems.length);
   };
 
-  const prevSlide = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (selectedProject?.gallery) {
-      setCurrentSlide((prev) => (prev - 1 + selectedProject.gallery!.length) % selectedProject.gallery!.length);
-    }
+  const prevSlide = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCurrentSlide((prev) => (prev - 1 + galleryItems.length) % galleryItems.length);
   };
-
-  const getCurrentMedia = (): GalleryItem | { type: 'video' | 'image', url: string, caption?: string } => {
-    if (!selectedProject) return { type: 'image', url: '' };
-
-    if (hasGallery) {
-      return selectedProject.gallery![currentSlide];
-    }
-    
-    // Fallback for projects without gallery
-    if (selectedProject.video) {
-        return { type: 'video', url: selectedProject.video };
-    }
-    return { type: 'image', url: selectedProject.image };
-  };
-
-  const currentMedia = getCurrentMedia();
 
   return (
     <section id="work" className="py-24 bg-transparent relative overflow-hidden">
@@ -93,12 +86,12 @@ const Work: React.FC = () => {
                      <span className="px-2 py-1 bg-black/60 border border-white/10 text-[10px] font-mono text-white rounded backdrop-blur-sm uppercase tracking-wider">
                         {project.category}
                     </span>
-                     {project.gallery && (
-                         <span className="px-2 py-1 bg-black/60 border border-white/10 text-[10px] font-mono text-hmi-accent rounded backdrop-blur-sm uppercase tracking-wider flex items-center gap-1">
-                            <Layers size={10} />
-                            {project.gallery.length}
-                         </span>
-                     )}
+                    {project.gallery && project.gallery.length > 1 && (
+                      <span className="px-2 py-1 bg-black/60 border border-white/10 text-[10px] font-mono text-hmi-accent rounded backdrop-blur-sm flex items-center gap-1">
+                        <Layers size={8} />
+                        GALLERY
+                      </span>
+                    )}
                 </div>
                 
                 {/* Image with interactions */}
@@ -158,7 +151,7 @@ const Work: React.FC = () => {
                   <div className="pt-4 border-t border-white/5 flex items-center justify-between group-hover:border-white/20 transition-colors">
                      <span className="text-xs font-semibold text-gray-500 group-hover:text-white transition-colors flex items-center gap-2">
                        <Zap size={12} className="text-hmi-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                       VIEW GALLERY
+                       VIEW DETAILS
                      </span>
                      <div className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 group-hover:bg-hmi-accent group-hover:text-black transition-all">
                         <ArrowUpRight size={16} />
@@ -180,13 +173,13 @@ const Work: React.FC = () => {
       
       {/* Modal Lightbox */}
       {selectedProject && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-8">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
             <div 
-                className="absolute inset-0 bg-black/95 backdrop-blur-xl animate-in fade-in duration-300" 
+                className="absolute inset-0 bg-black/90 backdrop-blur-xl animate-in fade-in duration-300" 
                 onClick={() => setSelectedProject(null)}
             ></div>
             
-            <div className="relative w-full max-w-7xl bg-hmi-gray border border-white/10 rounded-lg overflow-hidden shadow-2xl flex flex-col md:flex-row animate-in zoom-in-95 duration-300 h-full md:h-[85vh]">
+            <div className="relative w-full max-w-6xl bg-hmi-gray border border-white/10 rounded-lg overflow-hidden shadow-2xl flex flex-col md:flex-row animate-in zoom-in-95 duration-300 h-[80vh] md:h-[70vh]">
                 
                 {/* Close Button Mobile */}
                 <button 
@@ -196,84 +189,69 @@ const Work: React.FC = () => {
                     <X size={20} />
                 </button>
 
-                {/* Media Gallery Section */}
-                <div className="w-full md:w-3/4 bg-black flex items-center justify-center relative group overflow-hidden">
-                     
-                     {/* Media Content */}
-                     <div className="w-full h-full flex items-center justify-center p-4 md:p-0">
-                        {currentMedia.type === 'video' ? (
-                            <video 
-                                key={currentMedia.url} // Key forces re-render/reset when switching
-                                src={currentMedia.url} 
-                                controls 
-                                autoPlay 
-                                className="w-full h-full object-contain animate-in fade-in duration-500"
-                            />
-                        ) : (
-                            <img 
-                                key={currentMedia.url}
-                                src={currentMedia.url} 
-                                alt={selectedProject.title} 
-                                className="w-full h-full object-contain animate-in fade-in duration-500"
-                            />
-                        )}
-                     </div>
-
-                     {/* Gallery Navigation Controls */}
-                     {hasGallery && (selectedProject.gallery!.length > 1) && (
-                        <>
-                            <button 
-                                onClick={prevSlide}
-                                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-hmi-accent/20 border border-white/10 hover:border-hmi-accent text-white rounded-full transition-all backdrop-blur-sm opacity-0 group-hover:opacity-100"
-                            >
-                                <ChevronLeft size={24} />
-                            </button>
-                            <button 
-                                onClick={nextSlide}
-                                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-hmi-accent/20 border border-white/10 hover:border-hmi-accent text-white rounded-full transition-all backdrop-blur-sm opacity-0 group-hover:opacity-100"
-                            >
-                                <ChevronRight size={24} />
-                            </button>
-
-                            {/* Gallery Counter & Caption */}
-                            <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/80 to-transparent p-6 pb-8">
-                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                    <div className="flex items-center gap-3">
-                                        <span className="font-mono text-xl font-bold text-hmi-accent">
-                                            {String(currentSlide + 1).padStart(2, '0')}
-                                        </span>
-                                        <div className="h-px w-8 bg-white/30"></div>
-                                        <span className="font-mono text-sm text-gray-500">
-                                            {String(selectedProject.gallery!.length).padStart(2, '0')}
-                                        </span>
-                                    </div>
-                                    
-                                    {currentMedia.caption && (
-                                        <div className="text-white/90 text-sm font-medium border-l-2 border-hmi-accent pl-3">
-                                            {currentMedia.caption}
-                                        </div>
-                                    )}
-
-                                    {/* Type indicator */}
-                                    <div className="hidden md:flex items-center gap-2 text-xs font-mono text-gray-500 uppercase">
-                                        {currentMedia.type === 'video' ? <Film size={14}/> : <ImageIcon size={14}/>}
-                                        {currentMedia.type}
-                                    </div>
-                                </div>
-                                
-                                {/* Progress Bar */}
-                                <div className="w-full h-0.5 bg-white/10 mt-4 overflow-hidden rounded-full">
-                                    <div 
-                                        className="h-full bg-hmi-accent transition-all duration-300 ease-out"
-                                        style={{ width: `${((currentSlide + 1) / selectedProject.gallery!.length) * 100}%` }}
-                                    ></div>
-                                </div>
-                            </div>
-                        </>
+                {/* Media Section */}
+                <div className="w-full md:w-3/4 bg-black flex items-center justify-center relative overflow-hidden group">
+                     {/* Current Media */}
+                     {galleryItems[currentSlide]?.type === 'video' ? (
+                        <video 
+                            key={`slide-${currentSlide}`}
+                            src={galleryItems[currentSlide].url} 
+                            controls 
+                            autoPlay 
+                            className="w-full h-full object-contain"
+                        />
+                     ) : (
+                        <img 
+                            key={`slide-${currentSlide}`}
+                            src={galleryItems[currentSlide]?.url} 
+                            alt={selectedProject.title} 
+                            className="w-full h-full object-contain"
+                        />
                      )}
 
+                     {/* Navigation Arrows (only if > 1 item) */}
+                     {galleryItems.length > 1 && (
+                        <>
+                          <button 
+                            onClick={prevSlide}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white hover:bg-hmi-accent hover:text-black hover:border-hmi-accent transition-all z-20"
+                          >
+                            <ChevronLeft size={20} />
+                          </button>
+                          <button 
+                            onClick={nextSlide}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white hover:bg-hmi-accent hover:text-black hover:border-hmi-accent transition-all z-20"
+                          >
+                            <ChevronRight size={20} />
+                          </button>
+                        </>
+                     )}
+                     
                      {/* Decorative lines */}
                      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                     
+                     {/* Caption & Navigation Indicators */}
+                     <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/80 to-transparent pt-12 pb-4 px-6 flex flex-col items-center pointer-events-none">
+                        {galleryItems[currentSlide]?.caption && (
+                          <p className="text-white/90 font-medium text-sm mb-3 text-center px-4">
+                            {galleryItems[currentSlide].caption}
+                          </p>
+                        )}
+                        
+                        {galleryItems.length > 1 && (
+                          <div className="flex items-center gap-2 pointer-events-auto">
+                            {galleryItems.map((_, idx) => (
+                              <button
+                                key={idx}
+                                onClick={(e) => { e.stopPropagation(); setCurrentSlide(idx); }}
+                                className={`h-1 rounded-full transition-all duration-300 ${
+                                  idx === currentSlide ? 'w-8 bg-hmi-accent' : 'w-2 bg-white/20 hover:bg-white/40'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        )}
+                     </div>
                 </div>
 
                 {/* Details Sidebar */}
@@ -284,36 +262,28 @@ const Work: React.FC = () => {
                         </button>
                     </div>
 
-                    <div className="mb-2">
-                        <span className="text-hmi-accent text-xs font-mono tracking-wider uppercase bg-hmi-accent/10 px-2 py-1 rounded border border-hmi-accent/20">
-                            {selectedProject.category}
-                        </span>
+                    <div className="mb-1 flex items-center justify-between">
+                        <span className="text-hmi-accent text-xs font-mono tracking-wider uppercase">{selectedProject.category}</span>
+                        {galleryItems.length > 1 && (
+                          <span className="text-gray-500 text-[10px] font-mono">
+                            FILE {currentSlide + 1}/{galleryItems.length}
+                          </span>
+                        )}
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-4">{selectedProject.title}</h3>
                     
-                    <p className="text-gray-400 text-sm leading-relaxed mb-8 border-b border-white/5 pb-8">
+                    <p className="text-gray-400 text-sm leading-relaxed mb-8">
                         {selectedProject.description}
                     </p>
 
-                    <div className="space-y-6">
-                        <div>
-                             <div className="text-xs font-mono text-gray-500 mb-3 uppercase flex items-center gap-2">
-                                <Box size={12} />
-                                Technologies
-                             </div>
-                             <div className="flex flex-wrap gap-2">
-                                {selectedProject.tags.map(tag => (
-                                    <span key={tag} className="text-xs font-medium px-2 py-1 bg-white/5 text-gray-300 rounded border border-white/5 hover:border-white/20 transition-colors cursor-default">
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Project Metadata Example */}
-                        <div>
-                             <div className="text-xs font-mono text-gray-500 mb-2 uppercase">Role</div>
-                             <div className="text-sm text-gray-300">Lead Motion Designer</div>
+                    <div className="mt-auto">
+                         <div className="text-xs font-mono text-gray-500 mb-3 uppercase">Technologies</div>
+                         <div className="flex flex-wrap gap-2">
+                            {selectedProject.tags.map(tag => (
+                                <span key={tag} className="text-xs font-medium px-2 py-1 bg-white/10 text-gray-300 rounded border border-white/5">
+                                    {tag}
+                                </span>
+                            ))}
                         </div>
                     </div>
                 </div>
