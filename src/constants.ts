@@ -10,7 +10,7 @@ export const NAVIGATION_LINKS = [
 export const EXPERIENCES: ExperienceItem[] = [
   {
     id: '1',
-    role: 'Senior Motion Designer',
+    role: 'Senior UX Designer',
     company: 'Dongfeng Motor R&D Institute | Zero One Design',
     period: '2023.03 - Present',
     description: 'Leading HMI motion system construction, Unreal implementation, and full vehicle experience strategy.',
@@ -73,12 +73,13 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Motion Design for SOP',
     category: 'Mass Production',
     description: 'Led the platform-based motion system for 5 vehicle models. Defined the unified HMI motion language and technical specifications for development handoff.',
-    image: '/assets/project1/sop.png', 
-    video: '/assets//project1/cover.mp4',
+    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/sop.png', 
+    video: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/cover.mp4',
     gallery: [
-      { type: 'video', url: '/assets/project1/demo.mp4', caption: 'System Overview' },
-      { type: 'video', url: '/assets/project1/cluster_demo.mp4', caption: 'Cluster Implementation Transition' },
-      { type: 'video', url: '/assets/project1/quickcontrol.mp4', caption: 'Component Library' }
+      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/demo.mp4', caption: 'System Overview' },
+      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/cluster_demo.mp4', caption: 'Cluster Implementation Transition' },
+      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/quickcontrol.mp4', caption: 'Component Library' },
+      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/SentryModeen.mp4', caption: 'Sentry Mode Animation' }
     ],
     tags: ['HMI System', 'Standardization', 'Production']
   },
@@ -87,7 +88,7 @@ export const PROJECTS: ProjectItem[] = [
     title: '3D HMI POC',
     category: 'Concept & Verification',
     description: 'Built a high-fidelity verification environment using Unreal Engine. Responsible for scene construction, camera blueprint logic, and driving mode transitions.',
-    image: '/assets/project2/p2-cover.jpg',
+    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/3DHMI.png',
     gallery: [
         { type: 'image', url: '/assets/p2-cover.jpg', caption: 'Unreal Engine Environment' },
         { type: 'image', url: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=1600&auto=format&fit=crop', caption: 'Blueprint Logic Nodes' }
