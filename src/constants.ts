@@ -73,23 +73,12 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Motion Design for SOP',
     category: 'Mass Production',
     description: 'Led the platform-based motion system for 5 vehicle models. Defined the unified HMI motion language and technical specifications for development handoff.',
-    image: '/assets/project1/sop.png',
+    image: '/assets/project1/sop.png', 
+    video: '/assets//project1/cover.mp4',
     gallery: [
-      {
-        type: 'video',
-        url: '/assets/project1/demo.mp4',
-        caption: 'Unified Motion Language Overview - Dark Mode'
-      },
-      {
-        type: 'video',
-        url: '/assets/project1/cluster_demo.mp4',
-        caption: 'Instrument Cluster Transitions'
-      },
-      {
-        type: 'video',
-        url: '/assets/project1/quickcontrol.mp4',
-        caption: 'IVI System Feedback Animations'
-      }
+      { type: 'video', url: '/assets/project1/demo.mp4', caption: 'System Overview' },
+      { type: 'video', url: '/assets/project1/cover.mp4', caption: 'Cluster Implementation Transition' },
+      { type: 'video', url: '/assets/project1/quickcontrol.mp4', caption: 'Component Library' }
     ],
     tags: ['HMI System', 'Standardization', 'Production']
   },
@@ -98,18 +87,10 @@ export const PROJECTS: ProjectItem[] = [
     title: '3D HMI POC',
     category: 'Concept & Verification',
     description: 'Built a high-fidelity verification environment using Unreal Engine. Responsible for scene construction, camera blueprint logic, and driving mode transitions.',
-    image: 'https://picsum.photos/800/451?grayscale&blur=2',
+    image: '/assets/project2/p2-cover.jpg',
     gallery: [
-       {
-        type: 'image',
-        url: 'https://picsum.photos/800/453?grayscale',
-        caption: 'Unreal Engine Environment Setup'
-      },
-      {
-        type: 'image',
-        url: 'https://picsum.photos/800/454?grayscale',
-        caption: 'Blueprint Logic for Camera Control'
-      }
+        { type: 'image', url: '/assets/p2-cover.jpg', caption: 'Unreal Engine Environment' },
+        { type: 'image', url: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=1600&auto=format&fit=crop', caption: 'Blueprint Logic Nodes' }
     ],
     tags: ['Unreal Engine', 'Blueprints', 'Technical Art']
   },
@@ -118,7 +99,7 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Smart Cockpit Interaction',
     category: 'Advanced Interaction',
     description: 'Designed the flexible framework for the central control screen. Implemented card-based interaction logic and gesture controls for the dock bar.',
-    image: 'https://picsum.photos/800/452?grayscale&blur=2',
+    image: '/assets/p3-cover.jpg',
     tags: ['Interaction Logic', 'Flexible UI', 'Prototyping']
   },
   {
@@ -126,7 +107,7 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Smart Hardware Ecosystem',
     category: 'Ecosystem',
     description: 'Conceptualized the "Human-Vehicle-Home" interconnection. Visualized data flow and control logic between smart wearables, home devices, and the vehicle.',
-    image: 'https://picsum.photos/800/453?grayscale&blur=2',
+    image: '/assets/p4-cover.jpg',
     tags: ['IoT Visualization', 'Cross-Device', 'Strategy']
   },
   {
@@ -134,7 +115,7 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Brand Motion Identity',
     category: 'Branding',
     description: 'Established the digital motion identity for the automotive brand. Created dynamic logo reveals and system-wide startup animations.',
-    image: 'https://picsum.photos/800/454?grayscale&blur=2',
+    image: '/assets/p5-cover.jpg',
     tags: ['Brand DNA', 'Cinema 4D', 'After Effects']
   },
   {
@@ -142,7 +123,7 @@ export const PROJECTS: ProjectItem[] = [
     title: 'AR Cockpit Experience',
     category: 'AR Technology',
     description: 'Explored AR technology applications in the smart cockpit. Designed visualizers for navigation safety and real-time road data overlay.',
-    image: 'https://picsum.photos/800/455?grayscale&blur=2',
+    image: '/assets/p6-cover.jpg',
     tags: ['Augmented Reality', 'HUD', 'Future Tech']
   }
 ];
