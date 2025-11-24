@@ -89,11 +89,11 @@ export const PROJECTS: ProjectItem[] = [
     description: 'Built a high-fidelity verification environment using Unreal Engine. Responsible for scene construction, camera blueprint logic, and driving mode transitions.',
     image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/3DHMI.png',
     gallery: [
-        { type: 'image', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/360.mp4', caption: 'Unreal Engine Scene Overview' },
-        { type: 'image', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/establishmeng.mp4', caption: 'Scene Building Process' },
-        { type: 'image', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/normal2.mp4', caption: 'Driving mode' },
-        { type: 'image', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/dynamicwheather.mp4', caption: 'Dynamic Whether System' },
-        { type: 'image', url: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=1600&auto=format&fit=crop', caption: 'Blueprint Logic Nodes' }
+        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/360.mp4', caption: 'Unreal Engine Scene Overview' },
+        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/establishmeng.mp4', caption: 'Scene Building Process' },
+        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/normal2.mp4', caption: 'Driving mode' },
+        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/dynamicwheather.mp4', caption: 'Dynamic Whether System' },
+        { type: 'image', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/blueprint.png', caption: 'Blueprint Logic Nodes' }
     ],
     tags: ['Unreal Engine', 'Blueprints', 'Technical Art']
   },
@@ -102,7 +102,13 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Smart Cockpit Interaction',
     category: 'Advanced Interaction',
     description: 'Designed the flexible framework for the central control screen. Implemented card-based interaction logic and gesture controls for the dock bar.',
-    image: '/assets/p3-cover.jpg',
+    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/3cover.png',
+    gallery: [
+        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/SmartCockpit.mp4', caption: 'Smart Cockpit Overview' },
+        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/ai.mp4', caption: 'AI-driven Proactive Interaction Based on LLM' },
+        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/carphone.mp4', caption: 'Underlying Interconnection Between Mobile Phones And IVI' },
+        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/cardhighlight.mp4', caption: 'Dynamic Component Lighting' }
+    ],
     tags: ['Interaction Logic', 'Flexible UI', 'Prototyping']
   },
   {
@@ -110,7 +116,7 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Smart Hardware Ecosystem',
     category: 'Ecosystem',
     description: 'Conceptualized the "Human-Vehicle-Home" interconnection. Visualized data flow and control logic between smart wearables, home devices, and the vehicle.',
-    image: '/assets/p4-cover.jpg',
+    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/hardware.png',
     tags: ['IoT Visualization', 'Cross-Device', 'Strategy']
   },
   {
@@ -118,7 +124,7 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Brand Motion Identity',
     category: 'Branding',
     description: 'Established the digital motion identity for the automotive brand. Created dynamic logo reveals and system-wide startup animations.',
-    image: '/assets/p5-cover.jpg',
+    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/5cover.png',
     gallery: [
       { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/Mherologo.mp4', caption: 'MHero Logo Animation' },
       { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/cover.mp4', caption: 'Branding Animation For eπ ' },
@@ -132,7 +138,7 @@ export const PROJECTS: ProjectItem[] = [
     title: 'AR Cockpit Experience',
     category: 'AR Technology',
     description: 'Explored AR technology applications in the smart cockpit. Designed visualizers for navigation safety and real-time road data overlay.',
-    image: '/assets/p6-cover.jpg',
+    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/6cover.png',
     tags: ['Augmented Reality', 'HUD', 'Future Tech']
   }
 ];
