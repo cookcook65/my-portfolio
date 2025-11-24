@@ -4,13 +4,14 @@ export const NAVIGATION_LINKS = [
   { name: 'About', href: '#about' },
   { name: 'Work', href: '#work' },
   { name: 'Experience', href: '#experience' },
+  { name: 'Components', href: '#components' },
   { name: 'Contact', href: '#contact' },
 ];
 
 export const EXPERIENCES: ExperienceItem[] = [
   {
     id: '1',
-    role: 'Senior UX Designer',
+    role: 'Senior Motion Designer',
     company: 'Dongfeng Motor R&D Institute | Zero One Design',
     period: '2023.03 - Present',
     description: 'Leading HMI motion system construction, Unreal implementation, and full vehicle experience strategy.',
@@ -73,12 +74,12 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Motion Design for SOP',
     category: 'Mass Production',
     description: 'Led the platform-based motion system for 5 vehicle models. Defined the unified HMI motion language and technical specifications for development handoff.',
-    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/sop.png',
+    image: '/assets/p1-cover.jpg', 
+    video: '/assets/p1-demo.mp4',
     gallery: [
-      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/demo.mp4', caption: 'System Overview' },
-      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/cluster_demo.mp4', caption: 'Cluster Implementation Transition' },
-      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/quickcontrol.mp4', caption: 'Component Library' },
-      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/SentryModeen.mp4', caption: 'Sentry Mode Animation' }
+      { type: 'image', url: '/assets/p1-cover.jpg', caption: 'System Overview Dashboard' },
+      { type: 'video', url: '/assets/p1-demo.mp4', caption: 'Motion Behavior Specification' },
+      { type: 'image', url: 'https://images.unsplash.com/photo-1542281286-9e0a56e2e1a0?q=80&w=1600&auto=format&fit=crop', caption: 'Component Library' }
     ],
     tags: ['HMI System', 'Standardization', 'Production']
   },
@@ -87,13 +88,10 @@ export const PROJECTS: ProjectItem[] = [
     title: '3D HMI POC',
     category: 'Concept & Verification',
     description: 'Built a high-fidelity verification environment using Unreal Engine. Responsible for scene construction, camera blueprint logic, and driving mode transitions.',
-    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/3DHMI.png',
+    image: '/assets/p2-cover.jpg',
     gallery: [
-        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/360.mp4', caption: 'Unreal Engine Scene Overview' },
-        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/establishmeng.mp4', caption: 'Scene Building Process' },
-        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/normal2.mp4', caption: 'Driving mode' },
-        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/dynamicwheather.mp4', caption: 'Dynamic Whether System' },
-        { type: 'image', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/blueprint.png', caption: 'Blueprint Logic Nodes' }
+        { type: 'image', url: '/assets/p2-cover.jpg', caption: 'Unreal Engine Environment' },
+        { type: 'image', url: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=1600&auto=format&fit=crop', caption: 'Blueprint Logic Nodes' }
     ],
     tags: ['Unreal Engine', 'Blueprints', 'Technical Art']
   },
@@ -102,13 +100,7 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Smart Cockpit Interaction',
     category: 'Advanced Interaction',
     description: 'Designed the flexible framework for the central control screen. Implemented card-based interaction logic and gesture controls for the dock bar.',
-    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/3cover.png',
-    gallery: [
-        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/SmartCockpit.mp4', caption: 'Smart Cockpit Overview' },
-        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/ai.mp4', caption: 'AI-driven Proactive Interaction Based on LLM' },
-        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/carphone.mp4', caption: 'Underlying Interconnection Between Mobile Phones And IVI' },
-        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/cardhighlight.mp4', caption: 'Dynamic Component Lighting' }
-    ],
+    image: '/assets/p3-cover.jpg',
     tags: ['Interaction Logic', 'Flexible UI', 'Prototyping']
   },
   {
@@ -116,7 +108,7 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Smart Hardware Ecosystem',
     category: 'Ecosystem',
     description: 'Conceptualized the "Human-Vehicle-Home" interconnection. Visualized data flow and control logic between smart wearables, home devices, and the vehicle.',
-    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/hardware.png',
+    image: '/assets/p4-cover.jpg',
     tags: ['IoT Visualization', 'Cross-Device', 'Strategy']
   },
   {
@@ -124,13 +116,7 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Brand Motion Identity',
     category: 'Branding',
     description: 'Established the digital motion identity for the automotive brand. Created dynamic logo reveals and system-wide startup animations.',
-    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/5cover.png',
-    gallery: [
-      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/Mherologo.mp4', caption: 'MHero Logo Animation' },
-      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/cover.mp4', caption: 'Branding Animation For eπ ' },
-      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/quickcontrol.mp4', caption: 'Component Library' },
-      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/SentryModeen.mp4', caption: 'Sentry Mode Animation' }
-    ],
+    image: '/assets/p5-cover.jpg',
     tags: ['Brand DNA', 'Cinema 4D', 'After Effects']
   },
   {
@@ -138,7 +124,7 @@ export const PROJECTS: ProjectItem[] = [
     title: 'AR Cockpit Experience',
     category: 'AR Technology',
     description: 'Explored AR technology applications in the smart cockpit. Designed visualizers for navigation safety and real-time road data overlay.',
-    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/6cover.png',
+    image: '/assets/p6-cover.jpg',
     tags: ['Augmented Reality', 'HUD', 'Future Tech']
   }
 ];

@@ -1,8 +1,43 @@
 /// <reference types="vite/client" />
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { PROJECTS } from '../constants';
 import { ArrowUpRight, Layers, Zap, Box, X, PlayCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { ProjectItem, GalleryItem } from '../types';
+
+// Internal component to handle video playback state based on visibility
+const GalleryVideo: React.FC<{ src: string; isActive: boolean }> = ({ src, isActive }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isActive) {
+      // When becoming active: Reset to start and play
+      video.currentTime = 0;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.debug("Video autoplay prevented:", error);
+        });
+      }
+    } else {
+      // When becoming inactive: Pause immediately
+      video.pause();
+    }
+  }, [isActive]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      className="w-full h-full object-contain"
+      controls
+      loop
+      playsInline
+    />
+  );
+};
 
 const Work: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
@@ -221,13 +256,9 @@ const Work: React.FC = () => {
                             }`}
                          >
                             {item.type === 'video' ? (
-                                <video 
+                                <GalleryVideo 
                                     src={resolveAsset(item.url)}
-                                    className="w-full h-full object-contain"
-                                    controls={isActive}
-                                    autoPlay={isActive}
-                                    loop
-                                    playsInline
+                                    isActive={isActive}
                                 />
                              ) : (
                                 <img 

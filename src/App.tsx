@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Work from './components/Work';
+import ComponentsLibrary from './components/ComponentsLibrary';
 import Experience from './components/Experience';
 import Footer from './components/Footer';
 import InteractiveBackground from './components/InteractiveBackground';
@@ -14,6 +15,7 @@ const App: React.FC = () => {
       <main className="relative z-10">
         <Hero />
         <Work />
+        <ComponentsLibrary />
         <Experience />
       </main>
       <Footer />
