@@ -79,10 +79,14 @@ const Work: React.FC = () => {
       { 
         type: selectedProject.video ? 'video' : 'image', 
         url: selectedProject.video || selectedProject.image,
-        caption: 'Project Overview'
+        caption: 'Project Overview',
+        title: selectedProject.title,
+        description: selectedProject.description
       }
     ];
   }, [selectedProject]);
+
+  const activeItem = galleryItems[currentSlide];
 
   const nextSlide = (e?: React.MouseEvent) => {
     e?.stopPropagation();
@@ -332,11 +336,23 @@ const Work: React.FC = () => {
                           </span>
                         )}
                     </div>
+                    
                     <h3 className="text-2xl font-bold text-white mb-4">{selectedProject.title}</h3>
                     
-                    <p className="text-gray-400 text-sm leading-relaxed mb-8">
-                        {selectedProject.description}
-                    </p>
+                    {/* Dynamic Sidebar Content based on Active Slide */}
+                    <div key={currentSlide} className="animate-in fade-in slide-in-from-right-4 duration-300">
+                      {/* Subtitle for the specific gallery item */}
+                      {activeItem?.title && (
+                        <h4 className="text-sm font-bold text-hmi-accent mb-2 uppercase tracking-wide">
+                          {activeItem.title}
+                        </h4>
+                      )}
+                      
+                      {/* Description: fallback to project description if item specific one missing */}
+                      <p className="text-gray-400 text-sm leading-relaxed mb-8">
+                          {activeItem?.description || selectedProject.description}
+                      </p>
+                    </div>
 
                     <div className="mt-auto">
                          <div className="text-xs font-mono text-gray-500 mb-3 uppercase">Technologies</div>

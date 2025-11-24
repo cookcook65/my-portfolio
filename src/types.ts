@@ -10,7 +10,9 @@ export interface ExperienceItem {
 export interface GalleryItem {
   type: 'image' | 'video';
   url: string;
-  caption?: string;
+  caption?: string;     // Used for bottom overlay
+  title?: string;       // Used for sidebar subtitle
+  description?: string; // Used for sidebar specific description
 }
 
 export interface ProjectItem {

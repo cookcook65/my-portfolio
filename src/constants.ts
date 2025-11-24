@@ -76,10 +76,34 @@ export const PROJECTS: ProjectItem[] = [
     description: 'Led the platform-based motion system for 5 vehicle models. Defined the unified HMI motion language and technical specifications for development handoff.',
     image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/sop.png',
     gallery: [
-      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/demo.mp4', caption: 'System Overview' },
-      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/cluster_demo.mp4', caption: 'Cluster Implementation Transition' },
-      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/quickcontrol.mp4', caption: 'Component Library' },
-      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/SentryModeen.mp4', caption: 'Sentry Mode Animation' }
+      { 
+        type: 'video', 
+        url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/demo.mp4', 
+        caption: 'System Overview',
+        title: 'Unified Motion Language',
+        description: 'Established a comprehensive motion system that scales across 5 distinct vehicle models. This framework ensures brand consistency while allowing for model-specific personality traits.'
+      },
+      { 
+        type: 'video', 
+        url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/cluster_demo.mp4', 
+        caption: 'Cluster Implementation Transition',
+        title: 'Instrument Cluster Transitions',
+        description: 'Designed seamless mode transitions for the digital instrument cluster. Focused on reducing cognitive load by creating fluid morphing animations between Sport, Eco, and Comfort modes.'
+      },
+      { 
+        type: 'video', 
+        url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/quickcontrol.mp4', 
+        caption: 'Component Library',
+        title: 'Interactive Component Library',
+        description: 'A modular library of micro-interactions for quick controls. Includes haptic feedback visualizations and state changes for toggles, sliders, and buttons.'
+      },
+      { 
+        type: 'video', 
+        url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/SentryModeen.mp4', 
+        caption: 'Sentry Mode Animation',
+        title: 'Sentry Mode Visualization',
+        description: 'Safety system visualization designed to instill trust. The animation uses a scanning motif to communicate active monitoring without causing alarm.'
+      }
     ],
     tags: ['HMI System', 'Standardization', 'Production']
   },
@@ -90,7 +114,13 @@ export const PROJECTS: ProjectItem[] = [
     description: 'Built a high-fidelity verification environment using Unreal Engine. Responsible for scene construction, camera blueprint logic, and driving mode transitions.',
     image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/3DHMI.png',
     gallery: [
-        { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/360.mp4', caption: 'Unreal Engine Scene Overview' },
+        { 
+          type: 'video', 
+          url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/360.mp4', 
+          caption: 'Unreal Engine Scene Overview',
+          title: 'Real-time Scene Rendering',
+          description: 'A fully navigable 3D environment running in real-time on Unreal Engine, simulating high-end cockpit chip performance capabilities.'
+        },
         { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/establishmeng.mp4', caption: 'Scene Building Process' },
         { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/normal2.mp4', caption: 'Driving mode' },
         { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/dynamicwheather.mp4', caption: 'Dynamic Whether System' },
