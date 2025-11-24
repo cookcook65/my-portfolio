@@ -73,8 +73,7 @@ export const PROJECTS: ProjectItem[] = [
     title: 'Motion Design for SOP',
     category: 'Mass Production',
     description: 'Led the platform-based motion system for 5 vehicle models. Defined the unified HMI motion language and technical specifications for development handoff.',
-    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/sop.png', 
-    video: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/cover.mp4',
+    image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/sop.png',
     gallery: [
       { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/demo.mp4', caption: 'System Overview' },
       { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/cluster_demo.mp4', caption: 'Cluster Implementation Transition' },
@@ -90,8 +89,8 @@ export const PROJECTS: ProjectItem[] = [
     description: 'Built a high-fidelity verification environment using Unreal Engine. Responsible for scene construction, camera blueprint logic, and driving mode transitions.',
     image: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/3DHMI.png',
     gallery: [
-        { type: 'image', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/360.mp4', caption: 'Unreal Engine Environment Overview' },
-        { type: 'image', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/establish.mp4', caption: 'Driving mode' },
+        { type: 'image', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/360.mp4', caption: 'Unreal Engine Scene Overview' },
+        { type: 'image', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/establishmeng.mp4', caption: 'Scene Building Process' },
         { type: 'image', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/normal2.mp4', caption: 'Driving mode' },
         { type: 'image', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/dynamicwheather.mp4', caption: 'Dynamic Whether System' },
         { type: 'image', url: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=1600&auto=format&fit=crop', caption: 'Blueprint Logic Nodes' }
@@ -122,7 +121,7 @@ export const PROJECTS: ProjectItem[] = [
     image: '/assets/p5-cover.jpg',
     gallery: [
       { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/Mherologo.mp4', caption: 'MHero Logo Animation' },
-      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/cluster_demo.mp4', caption: 'Cluster Implementation Transition' },
+      { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/cover.mp4', caption: 'Branding Animation For eπ ' },
       { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/quickcontrol.mp4', caption: 'Component Library' },
       { type: 'video', url: 'https://nestorsportfolio.oss-cn-shanghai.aliyuncs.com/portfolio/SentryModeen.mp4', caption: 'Sentry Mode Animation' }
     ],
